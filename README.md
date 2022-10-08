@@ -7,3 +7,5 @@ I expanded the program to allow for use by multiple people and added features to
 This is very much a beginner - level project.
 
 Any critisism is very welcome.
+
+All files and code is in the 'Finances Project.zip' file. The program runs from a Python file named 'FinancesProgram.py' and consults a MS Acess database named 'Spending.accdb'.
