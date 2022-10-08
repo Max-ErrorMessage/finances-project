@@ -20,7 +20,7 @@ def currentInfo():
 # runs the sqlcommand in Spending.accdb and returns the output generated
 def selectFromFile(sqlcommand):  # runs the SQL command in Spending.accdb and returns the result
     conn_str = (r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
-                r'DBQ=' + filelocation + '\Finances Project\Spending.accdb;')  # fetches data from the Spending
+                r'DBQ=' + filelocation + r'\Finances Project\Spending.accdb;')  # fetches data from the Spending
     # database in the folder
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
@@ -379,7 +379,7 @@ def main():
 
 
 global filelocation  # addition for users other than myself - enter the location of the folder (not the document)
-# filelocation is used in line 24 to specify the document area if you would like to hardcode in your file location
+# filelocation is used in line 23 to specify the document area if you would like to hardcode in your file location
 filelocation = input("Please specify the location of the 'Finances Project' Folder ")
 
 
