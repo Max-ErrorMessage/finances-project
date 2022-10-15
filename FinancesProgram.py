@@ -229,7 +229,7 @@ def compareSpending3(timevalue, booleancumulative):
     earliestvalue = alldates[0][0]  # finds the earliest value from the list
     latestvalue = alldates[len(alldates) - 1][0]  # finds the latest value from the list
 
-    timedifference = int(latestvalue) - int(earliestvalue)  # calculates how many times the program will have to repeat
+    timedifference = int(latestvalue) - int(earliestvalue) + 1  # calculates how many times the program will have to repeat
 
     xvalues = []  # defines values for x and y on the graph
     yvalues = []
