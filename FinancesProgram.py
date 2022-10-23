@@ -292,28 +292,31 @@ def calculatePayments(timevalue):
     # an infinitely long output with infinite people, so it is outputted in the terminal
     paymentsuncalculated = True
     while paymentsuncalculated:  # repeats the process of adding to the output until all payments have been calculated
-        if assets[0][0] > liabilities[0][0]:  # if the current asset is greater than the current liability then the
-            # asset will become shorter but the liability can be popped from the list
-            paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([liabilities[0][0]])[0]} to {assets[0][1]} 
+        try:
+            if assets[0][0] > liabilities[0][0]:  # if the current asset is greater than the current liability then the
+                # asset will become shorter but the liability can be popped from the list
+                paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([liabilities[0][0]])[0]} to {assets[0][1]} 
 """  # adds a statement of debt to the current payments
-            assets[0][0] = assets[0][0] - liabilities[0][0]  # current asset must be reduced as the debt owed has
-            # already been factored into the paymentoutput
-            liabilities.pop(0)  # remove the first value of the liabilities list to update the current liabilities value
-        elif liabilities[0][0] > assets[0][0]:  # similar principle to above but reverse the assets and liabilities.
-            paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([assets[0][0]])[0]} to {assets[0][1]}
+                assets[0][0] = assets[0][0] - liabilities[0][0]  # current asset must be reduced as the debt owed has
+                # already been factored into the paymentoutput
+                liabilities.pop(0)  # remove the first value of the liabilities list to update the current liabilities value
+            elif liabilities[0][0] > assets[0][0]:  # similar principle to above but reverse the assets and liabilities.
+                paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([assets[0][0]])[0]} to {assets[0][1]}
 """  # despite the swapping of assets and liabilities in this elif statement, liabilities are still owed to assets to
-            # the output is only changed by the reference to the amount owed
-            liabilities[0][0] = liabilities[0][0] - assets[0][0]
-            assets.pop(0)
-        else:  # current asset must be equal to current liability
-            paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([liabilities[0][0]])[0]} to {assets[0][1]}
+                # the output is only changed by the reference to the amount owed
+                liabilities[0][0] = liabilities[0][0] - assets[0][0]
+                assets.pop(0)
+            else:  # current asset must be equal to current liability
+                paymentoutput = paymentoutput + f"""{liabilities[0][1]} owes {niceValues([liabilities[0][0]])[0]} to {assets[0][1]}
 """
-            liabilities.pop(0)  # if both assets and liabilities are the same then both can be removed once they have
-            # been factored into the paymentoutput value
-            assets.pop(0)
-        if len(assets) == 0:  # when the length of either list reaches 0 then all payments have been calculated. The
-            # lists should reach length 0 at the same point, so it is only necessary to check one; assets
-            paymentsuncalculated = False
+                liabilities.pop(0)  # if both assets and liabilities are the same then both can be removed once they have
+                # been factored into the paymentoutput value
+                assets.pop(0)
+            if len(assets) == 0:  # when the length of either list reaches 0 then all payments have been calculated. The
+                # lists should reach length 0 at the same point, so it is only necessary to check one; assets
+                paymentsuncalculated = False
+        except IndexError:
+            paymentoutput = "ERROR - No purchases have been made so far this week. "
 
     print(paymentoutput)
 
